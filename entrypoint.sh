@@ -1,6 +1,7 @@
 #!/bin/sh -l
 
-set -e
+set -eux
+set -o pipefail
 
 echo "#################################################"
 echo "Starting ${GITHUB_WORKFLOW}:${GITHUB_ACTION}"
