@@ -31,7 +31,7 @@ if [ -z "$INPUT_KEY" ]
 then
   echo "Using password"
   export SSHPASS="$PASS"
-  sshpass -e ssh "$INPUT_HOST" "$CMD"
+  sshpass -e ssh -o StrictHostKeyChecking=accept-new "$INPUT_HOST" "$CMD"
 else
   echo "Using private key"
   echo "$INPUT_KEY" > "$HOME/.ssh/id_rsa"
@@ -40,5 +40,5 @@ else
   echo "  IdentityFile $HOME/.ssh/id_rsa" >> "$config"
   cat "$HOME/.ssh/config"
 
-  sshpass ssh "$INPUT_HOST" "$CMD"
+  ssh -o StrictHostKeyChecking=accept-new "$INPUT_HOST" "$CMD"
 fi
