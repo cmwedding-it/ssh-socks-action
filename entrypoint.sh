@@ -10,6 +10,11 @@ if [ -n "$INPUT_SOCKS5_PWD" ]; then
   export SOCKS5_PASSWD="$INPUT_SOCKS5_PWD"
 fi
 
+if [[ ! "$INPUT_HOST" =~ ^\d ]]; then
+  echo "The host doesn't seem to be an IP, resolving via dig..."
+  INPUT_HOST=$(dig +short "$INPUT_HOST")
+fi
+
 config="$HOME/.ssh/config"
 
 echo "Host ${INPUT_HOST}" > "$config"
