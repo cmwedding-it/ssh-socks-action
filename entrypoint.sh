@@ -6,7 +6,10 @@ CMD=$(echo "$INPUT_RUN" | sed "s/ / %% /g")
 
 mkdir "$HOME/.ssh"
 
-export SOCKS5_PASSWD="$INPUT_SOCKS5_PWD"
+if [ -n "$INPUT_SOCKS5_PWD" ]; then
+  export SOCKS5_PASSWD="$INPUT_SOCKS5_PWD"
+fi
+
 config="$HOME/.ssh/config"
 
 echo "Host ${INPUT_HOST}" > "$config"
