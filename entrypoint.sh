@@ -2,8 +2,6 @@
 
 set -e
 
-CMD=$(echo "$INPUT_RUN" | sed "s/ / %% /g")
-
 mkdir "$HOME/.ssh"
 
 if [ -n "$INPUT_SOCKS5_PWD" ]; then
@@ -31,7 +29,7 @@ if [ -z "$INPUT_KEY" ]
 then
   echo "Using password"
   export SSHPASS="$PASS"
-  sshpass -e ssh -o StrictHostKeyChecking=accept-new "$INPUT_HOST" "$CMD"
+  sshpass -e ssh -o StrictHostKeyChecking=accept-new "$INPUT_HOST" "$INPUT_RUN"
 else
   echo "Using private key"
   echo "$INPUT_KEY" > "$HOME/.ssh/id_rsa"
@@ -40,5 +38,5 @@ else
   echo "  IdentityFile $HOME/.ssh/id_rsa" >> "$config"
   cat "$HOME/.ssh/config"
 
-  ssh -o StrictHostKeyChecking=accept-new "$INPUT_HOST" "$CMD"
+  ssh -o StrictHostKeyChecking=accept-new "$INPUT_HOST" "$INPUT_RUN"
 fi
