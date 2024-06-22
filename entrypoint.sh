@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-set -ex
+set -e
 
 CMD=$(echo "$INPUT_RUN" | sed "s/ / %% /g")
 
